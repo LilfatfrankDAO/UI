@@ -7,7 +7,7 @@ import "./Home.scss";
 
 const Home = () => {
   const navigate = useNavigate();
-  const { networkVersion, setNetworkVersion, notification, connect } =
+  const { networkVersion, setNetworkVersion } =
     useContext(AppContext);
 
   useEffect(() => {
@@ -15,14 +15,6 @@ const Home = () => {
       setNetworkVersion(window.ethereum.chainId);
     }
   }, []);
-
-  const connectWallet = (chain) => {
-    if (chain !== "0x4") {
-      notification("Please switch to Rinkeby");
-    } else {
-      connect();
-    }
-  };
 
   return (
     <Box className="home">
@@ -49,12 +41,13 @@ const Home = () => {
                 style={{ marginLeft: "5px" }}
               />
             </Button>
-            <Button
+            {/* Connect button disabled for removing the dashboard functionality */}
+            {/* <Button
               onClick={() => connectWallet(networkVersion)}
               type="secondary"
             >
               Connect Wallet
-            </Button>
+            </Button> */}
           </Box>
         </Box>
         <img src="Membership.png" alt="membership" width={700} height={400} />
