@@ -1,0 +1,15 @@
+@import "../../style/mixins.scss";
+
+.input {
+  width: 100%;
+  @include flex(column, flex-start, "", 60px);
+  .form {
+    @include flex(column, flex-start, center, 30px);
+    .field {
+      input {
+        width: 400px;
+        border: 2px solid var(--primary);
+      }
+    }
+  }
+}
