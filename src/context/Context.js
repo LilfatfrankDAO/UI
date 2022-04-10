@@ -1,11 +1,14 @@
+import { useWeb3React } from "@web3-react/core";
 import { useSnackbar } from "notistack";
 import { createContext, useState } from "react";
-import Web3 from "web3";
+import { injectors } from "../wallet/connectors";
 
 export const AppContext = createContext();
 
 export const AppContextProvider = ({ children }) => {
+  const { activate, account, active } = useWeb3React();
   const [daoData, setDaoData] = useState();
+  const [networkVersion, setNetworkVersion] = useState();
   const [form, setForm] = useState({
     snapshot: "",
     count: "",
@@ -13,14 +16,8 @@ export const AppContextProvider = ({ children }) => {
   });
   const { enqueueSnackbar } = useSnackbar();
 
-  const ethEnabled = async () => {
-    if (window.ethereum) {
-      await window.ethereum.request({ method: "eth_requestAccounts" });
-      window.web3 = new Web3(window.ethereum);
-      return true;
-    }
-    return false;
-  };
+  const notification = (message, variant = "error") =>
+    enqueueSnackbar(message, { variant });
 
   const callApi = async (snapshot) => {
     try {
@@ -30,7 +27,15 @@ export const AppContextProvider = ({ children }) => {
       const data = await response.json();
       setDaoData(JSON.parse(data));
     } catch (error) {
-      enqueueSnackbar(error.message, { variant: "error" });
+      notification(error.message);
+    }
+  };
+
+  const connect = async () => {
+    try {
+      await activate(injectors);
+    } catch (error) {
+      notification(error.message);
     }
   };
 
@@ -39,7 +44,12 @@ export const AppContextProvider = ({ children }) => {
     callApi,
     form,
     setForm,
-    ethEnabled
+    notification,
+    connect,
+    account,
+    networkVersion,
+    setNetworkVersion,
+    connected: active
   };
 
   return (

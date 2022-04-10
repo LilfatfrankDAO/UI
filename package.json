@@ -42,10 +42,17 @@
     "@mui/icons-material": "^5.6.0",
     "@mui/material": "^5.6.0",
     "@mui/styled-engine-sc": "^5.5.2",
+    "@web3-react/core": "^6.1.9",
+    "@web3-react/injected-connector": "^6.0.7",
     "notistack": "^2.0.3",
+    "react-device-detect": "^2.1.2",
+    "react-redux": "^7.2.8",
     "react-router-dom": "^6.3.0",
+    "redux": "^4.1.2",
+    "redux-thunk": "^2.4.1",
     "sass": "^1.50.0",
     "styled-components": "^5.3.5",
-    "web3": "^1.7.3"
+    "web3": "^1.7.3",
+    "web3-eth-contract": "^1.7.3"
   }
 }

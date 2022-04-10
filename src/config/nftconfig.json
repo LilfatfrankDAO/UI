@@ -1,0 +1,13 @@
+{
+    "CONTRACT_ADDRESS": "0x90B56dD6e50d5329b7fAbd976e18dC3B1b9DdC3A",
+    "SCAN_LINK": "https://rinkeby.etherscan.io/address/0x90B56dD6e50d5329b7fAbd976e18dC3B1b9DdC3A",
+    "NETWORK": {
+      "NAME": "Ethereum",
+      "SYMBOL": "ETH",
+      "ID": 4
+    },
+    "NFT_NAME": "LFF DAO",
+    "GAS_LIMIT": 285000,
+    "SYMBOL": "LFF"
+  }
+  

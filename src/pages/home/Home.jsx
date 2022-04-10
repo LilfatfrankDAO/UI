@@ -1,5 +1,5 @@
 import { Box, Typography } from "@mui/material";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button, Sprite } from "../../components";
 import { AppContext } from "../../context/Context";
@@ -7,11 +7,21 @@ import "./Home.scss";
 
 const Home = () => {
   const navigate = useNavigate();
-  const { ethEnabled } = useContext(AppContext);
+  const { networkVersion, setNetworkVersion, notification, connect } =
+    useContext(AppContext);
 
-  const connect = async () => {
-    const wait = await ethEnabled();
-    console.log(wait);
+  useEffect(() => {
+    if (window.ethereum) {
+      setNetworkVersion(window.ethereum.chainId);
+    }
+  }, []);
+
+  const connectWallet = (chain) => {
+    if (chain !== "0x4") {
+      notification("Please switch to Rinkeby");
+    } else {
+      connect();
+    }
   };
 
   return (
@@ -39,7 +49,10 @@ const Home = () => {
                 style={{ marginLeft: "5px" }}
               />
             </Button>
-            <Button onClick={connect} type="secondary">
+            <Button
+              onClick={() => connectWallet(networkVersion)}
+              type="secondary"
+            >
               Connect Wallet
             </Button>
           </Box>
