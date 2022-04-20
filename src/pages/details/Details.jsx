@@ -11,6 +11,7 @@ const Details = () => {
   const { daoData, form } = useContext(AppContext);
   const dispatch = useDispatch();
   const blockchain = useSelector((state) => state.blockchain);
+  /* Code is hardcoded to demo the mvp */
   const [tokenUri, setTokenUri] = useState([
     "https://ipfs.infura.io/ipfs/QmT1DunTGXxau8eSMFRmhu7gsB6XkGGernciPBJwUpijJB",
     "https://ipfs.infura.io/ipfs/QmcK4pGhiBrgb9NYgP1DeTTHAKA4PCeHku7Lsu8qKSajMT",
@@ -38,6 +39,7 @@ const Details = () => {
       })
       .then((receipt) => {
         console.log(receipt);
+        /* Code is hardcoded to demo the mvp */
         dispatch(fetchData(blockchain.account));
         const tokenArr = [...tokenUri];
         tokenArr.shift();
